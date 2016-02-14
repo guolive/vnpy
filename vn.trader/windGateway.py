@@ -5,10 +5,10 @@ Wind Python API的gateway接入
 '''
 from threading import Thread
 
-try:
-    from WindPy import w
-except ImportError:
-    print u'请先安装WindPy接口'
+#try:
+#    from WindPy import w
+#except ImportError:
+#    print u'请先安装WindPy接口'
 
 from vtGateway import *
 
