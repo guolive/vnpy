@@ -41,4 +41,4 @@ $python -m pip install -r requirements.txt
 locale-gen zh_CN.GB18030
 
 # Install vn.py
-$python -m pip install . $@
+# $python -m pip install . $@
