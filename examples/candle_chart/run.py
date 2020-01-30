@@ -9,10 +9,10 @@ if __name__ == "__main__":
     app = create_qapp()
 
     bars = database_manager.load_bar_data(
-        "IF88",
+        "BTCUSD",
         Exchange.CFFEX,
-        interval=Interval.MINUTE,
-        start=datetime(2019, 7, 1),
+        interval=Interval.HOUR,
+        start=datetime(2018, 7, 1),
         end=datetime(2019, 7, 17)
     )
 

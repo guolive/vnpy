@@ -17,7 +17,7 @@ from .item import ChartItem
 pg.setConfigOptions(antialias=True)
 
 
-class ChartWidget(pg.PlotWidget):
+class hartWidget(pg.PlotWidget):
     """"""
     MIN_BAR_COUNT = 100
 
