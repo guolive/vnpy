@@ -2,7 +2,8 @@
 
 import sys
 
-from vnpy.app.cta_strategy_pro.base import Direction, CtaComponent
+from vnpy.app.cta_strategy_pro.base import Direction
+from vnpy.app.cta_strategy_pro.template import CtaComponent
 
 
 class CtaPosition(CtaComponent):
@@ -14,13 +15,13 @@ class CtaPosition(CtaComponent):
     """
 
     def __init__(self, strategy, **kwargs):
-        super(CtaPosition, self).__init__(strategy=strategy, kwargs=kwargs)
+        super(CtaComponent).__init__(strategy=strategy)
         self.long_pos = 0    # 多仓持仓(正数)
         self.short_pos = 0   # 空仓持仓(负数)
         self.pos = 0        # 持仓状态 0:空仓/对空平等； >=1 净多仓 ；<=-1 净空仓
         self.maxPos = sys.maxsize        # 最大持仓量（多仓+空仓总量）
 
-    def open_pos(self, direction: Direction, volume: float):
+    def open_pos(self, direction: Direction, volume: int):
         """开、加仓"""
         # volume: 正整数
 
@@ -30,7 +31,7 @@ class CtaPosition(CtaComponent):
 
             # 更新
             self.write_log(f'多仓:{self.long_pos}->{self.long_pos + volume}')
-            self.write_log(f'净:{self.pos}->{self.pos + volume}')
+            self.write_log(u'净:{self.pos}->{self.pos + volume}')
             self.long_pos += volume
             self.pos += volume
 
@@ -39,13 +40,13 @@ class CtaPosition(CtaComponent):
                 self.write_error(content=f'开仓异常,净:{self.pos},空:{self.short_pos},加空:{volume},超过:{self.maxPos}')
 
             self.write_log(f'空仓:{self.short_pos}->{self.short_pos - volume}')
-            self.write_log(f'净:{self.pos}->{self.pos - volume}')
+            self.write_log(u'净:{self.pos}->{self.pos - volume}')
             self.short_pos -= volume
             self.pos -= volume
 
         return True
 
-    def close_pos(self, direction: Direction, volume:float):
+    def close_pos(self, direction: Direction, volume):
         """平、减仓"""
         # vol: 正整数
 
